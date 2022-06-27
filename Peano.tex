@@ -1,0 +1,78 @@
+\documentclass{ctexart}
+
+\usepackage{graphicx}
+\usepackage{amsmath}
+
+\title{作业一:带皮亚诺余项的泰勒定理问题的叙述与证明}
+
+
+\author{邵盛栋 \\ 信息与计算科学 3200103951}
+
+\begin{document}
+
+\maketitle
+
+
+这是一个来自数学分析领域的问题,如果函数$ f $在点$ x_{0} $可导,则有
+\[f(x)=f(x_{0})+f'(x_{0})(x-x_{0})+o(x-x_{0})\]
+即在点$ x_{0} $附近,用一次多项式$ f(x_{0})+f'(x_{0})(x-x_{0}) $逼近函数$ f(x) $时,其误差为$ (x-x_{0}) $的高阶无穷小量.然而在很多场合,取一次多项式逼近是不够的,往往需要用二次或高于二次的多项式去逼近,并要求误差为$ o((x-x_{0})^{n}) $，其中$ n $为多项式的次数.为此,我们考察任一$ n $次多项式
+\begin{equation}
+	p_{n}(x)=a_{0}+a_{1}(x-x_{0})+a_{2}(x-x_{0})^{2}+\cdots+a_{n}(x-x_{0})^{n}
+	\label{eq:1}
+\end{equation}
+逐次求它在点$ x_{0} $的各阶导数,得到
+\[p_{n}(x_{0})=a_{0},p_{n}'(x_{0})=a_{1},p_{n}''(x_{0})=2!a_{2},\cdots,p_{n}^{(n)}(x_{0})=n!a_{n}\]
+即
+\[a_{0}=p_{n}(x_{0}),a_{1}=\dfrac{p_{n}'(x_{0})}{1!},a_{2}=\dfrac{p_{n}''(x_{0})}{2!},\cdots,a_{n}=\dfrac{p_{n}^{(n)}(x_{0})}{n!}\]
+由此可见,多项式$ p_{n}(x) $的各项系数由其在点$ x_{0} $的各阶导数值所唯一确定.
+
+对于一般函数$ f $,设它在点$ x_{0} $存在直到$ n $阶的导数.由这些导数构造一个$ n $次多项式
+\begin{equation}
+	\begin{split}
+		T_{n}(x)=&f(x_{0})+\dfrac{f'(x_{0})}{1!}(x-x_{0})+\dfrac{f''(x_{0})}{2!}(x-x_{0})^{2}+\cdots+\\
+		&\dfrac{f^{(n)}(x_{0})}{n!}(x-x_{0})^{n}
+		\label{eq:2}
+	\end{split}
+\end{equation}
+称为函数$ f $在点$ x_{0} $的\textbf{泰勒多项式},$ T_{n}(x) $的各项系数$ \dfrac{f^{(k)}(x_{0})}{k!}(k=1,2,\cdots,n) $称为\textbf{泰勒系数}.由上面对多项式系数的讨论,易知$ f(x) $与其泰勒多项式$ T_{n}(x) $在点$ x_{0} $有相同的函数值和相同的直至$ n $阶导数值,即
+\begin{equation}
+	f^{(k)}(x_{0})=T_{n}^{(k)}(x_{0}),k=0,1,2,\cdots,n
+	\label{eq:3}
+\end{equation}
+下面要证明$ f(x)-T_{n}(x)=o((x-x_{0})^{n}) $,即以式\ref{eq:2}所示的泰勒多项式逼近$ f(x) $时,其误差为关于$ (x-x_{0})^{n} $的高阶无穷小量.
+\section{定理描述}
+定理叙述如下: 若函数$ f $在点$ x_{0} $存在直至$ n $阶导数,则有$ f(x)=T_{n}(x)+o((x-x_{0})^{n}) $,即
+\begin{equation}
+	\begin{split}
+		f(x)=&f(x_{0})+\dfrac{f'(x_{0})}{1!}(x-x_{0})+\dfrac{f''(x_{0})}{2!}(x-x_{0})^{2}+\cdots+\\
+		&\dfrac{f^{(n)}(x_{0})}{n!}(x-x_{0})^{n}+o((x-x_{0})^{n})
+		\label{eq:4}
+	\end{split}
+\end{equation}
+
+\section{证明}
+设
+\[R_{n}(x)=f(x)-T_{n}(x),Q_{n}(x)=(x-x_{0})^{n}\]
+现在只要证
+\[\lim_{x\to x_{0}}\dfrac{R_{n}(x)}{Q_{n}(x)}=0\]
+
+由关系式\ref{eq:3}可知,
+\[R_{n}(x_{0})=R_{n}'(x_{0})=\cdots=R_{n}^{(n)}(x_{0})=0\]
+并易知
+\[Q_{n}(x_{0})=Q_{n}'(x_{0})=\cdots=Q_{n}^{(n-1)}(x_{0})=0,Q_{n}^{(n)}(x_{0})=n!\]
+因为$ f^{(n)}(x_{0}) $存在,所以在点$ x_{0} $的某邻域$ U(x_{0}) $上$ f $存在$ n-1 $阶导函数.于是,当$ x\in U^{\circ}(x_{0}) $且$ x\to x_{0} $时,允许接连使用洛必达法则$ n-1 $次,得到
+\[
+\begin{split}
+	\lim_{x\to x_{0}}\dfrac{R_{n}(x)}{Q_{n}(x)}&=\lim_{x\to x_{0}}\dfrac{R_{n}'(x)}{Q_{n}'(x)}=\cdots=\lim_{x\to x_{0}}\dfrac{R_{n}^{(n-1)}(x)}{Q_{n}^{n-1}(x)}\\
+	&=\lim_{x\to x_{0}}\dfrac{f^{(n-1)}(x)-f^{(n-1)}(x_{0})-f^{(n)}(x_{0})(x-x_{0})}{n(n-1)\cdots2(x-x_{0})}\\
+	&=\dfrac{1}{n!}\lim_{x\to x_{0}}[\dfrac{f^{(n-1)}(x)-f^{(n-1)}(x_{0})}{x-x_{0}}-f^{(n)}(x_{0})]\\
+	&=0
+\end{split}
+\]
+
+定理所证的式\ref{eq:4}称为函数$ f $在$ x_{0} $的\textbf{泰勒公式},$ R_{n}(x)=f(x)-T_{n}(x) $称为\textbf{泰勒公式的余项},形如$ o((x-x_{0})^{n}) $的余项称为\textbf{皮亚诺(Peano)型余项}.所以式\ref{eq:4}又称为\textbf{带有皮亚诺型余项的泰勒公式}.
+
+
+
+
+\end{document}
